@@ -192,6 +192,7 @@ cga_putc(int c)
 	}
 
 	// What is the purpose of this?
+	// Move all the content 1 line upward
 	if (crt_pos >= CRT_SIZE) {
 		int i;
 

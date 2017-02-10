@@ -49,6 +49,9 @@ seta20.2:
   movl    %cr0, %eax
   orl     $CR0_PE_ON, %eax
   movl    %eax, %cr0
+
+  xor     %eax, %eax
+  inc     %eax
   
   # Jump to next instruction, but in 32-bit code segment.
   # Switches processor into 32-bit mode.
