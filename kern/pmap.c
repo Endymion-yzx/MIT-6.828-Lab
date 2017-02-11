@@ -102,8 +102,15 @@ boot_alloc(uint32_t n)
 	// to a multiple of PGSIZE.
 	//
 	// LAB 2: Your code here.
-
-	return NULL;
+	if (n > 0){
+		char* free = nextfree;
+		nextfree = ROUNDUP(nextfree + n, PGSIZE);
+		if (nextfree >= npages * PGSIZE) panic("boot_alloc: no enough memory");
+		return (void*)free;
+	}
+	else {
+		return (void*)nextfree;
+	}
 }
 
 // Set up a two-level page table:
