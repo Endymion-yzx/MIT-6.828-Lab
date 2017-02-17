@@ -189,6 +189,9 @@ trap_dispatch(struct Trapframe *tf)
 	if (tf->tf_trapno == T_PGFLT){
 		page_fault_handler(tf);
 	}
+	else if (tf->tf_trapno == T_BRKPT){
+		monitor(tf);
+	}
 	else {
 		// Unexpected trap: The user process or the kernel has a bug.
 		print_trapframe(tf);

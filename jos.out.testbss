@@ -30,4 +30,4 @@ TRAP frame at 0xf01be000
 Destroyed the only environment - nothing more to do!
 Welcome to the JOS kernel monitor!
 Type 'help' for a list of commands.
-qemu: terminating on signal 15 from pid 14061
+qemu: terminating on signal 15 from pid 5895
