@@ -8,8 +8,12 @@ check_kern_pgdir() succeeded!
 check_page_installed_pgdir() succeeded!
 [00000000] new env 00001000
 Incoming TRAP frame at 0xefffffbc
+System call No: 2
+Incoming TRAP frame at 0xefffffbc
+System call No: 0
+[00001000] user_mem_check assertion failure for va f010000c
 [00001000] free env 00001000
 Destroyed the only environment - nothing more to do!
 Welcome to the JOS kernel monitor!
 Type 'help' for a list of commands.
-qemu: terminating on signal 15 from pid 18781
+qemu: terminating on signal 15 from pid 19996

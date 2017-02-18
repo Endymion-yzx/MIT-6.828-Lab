@@ -200,7 +200,7 @@ trap_dispatch(struct Trapframe *tf)
 		uint32_t a3 = tf->tf_regs.reg_ebx;
 		uint32_t a4 = tf->tf_regs.reg_edi;
 		uint32_t a5 = tf->tf_regs.reg_esi;
-		// cprintf("System call No: %u\n", syscallno);
+		cprintf("System call No: %u\n", syscallno);
 		int32_t ret = syscall(syscallno, a1, a2, a3, a4, a5);
 		// asm volatile("movl %0, %%eax":: "r" (ret) : "%eax");
 		tf->tf_regs.reg_eax = ret;
