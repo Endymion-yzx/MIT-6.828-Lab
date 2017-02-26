@@ -623,6 +623,7 @@ mmio_map_region(physaddr_t pa, size_t size)
 	// Your code here:
 	physaddr_t pa_end = ROUNDUP(pa + size, PGSIZE);
 	physaddr_t pa_start = ROUNDDOWN(pa, PGSIZE);
+	cprintf("mmio: base = %08x, start = %08x, size = %08x\n", base, pa_start, pa_end - pa_start);
 
 	if (pa_end > MMIOLIM) panic("mmio overflow");
 

@@ -176,6 +176,7 @@ mp_init(void)
 		return;
 	ismp = 1;
 	lapicaddr = conf->lapicaddr;
+	cprintf("mp_init: lapicaddr = %08x\n", lapicaddr);
 
 	for (p = conf->entries, i = 0; i < conf->entry; i++) {
 		switch (*p) {
