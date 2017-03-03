@@ -52,7 +52,6 @@ void trap_simderr();
 void trap_syscall();
 void trap_default();
 
-
 static const char *trapname(int trapno)
 {
 	static const char * const excnames[] = {
@@ -379,6 +378,46 @@ page_fault_handler(struct Trapframe *tf)
 	//   (the 'tf' variable points at 'curenv->env_tf').
 
 	// LAB 4: Your code here.
+	if (curenv->env_pgfault_upcall){
+		// cprintf("Have pgfault upcall\n");
+		uintptr_t esp = curenv->env_tf.tf_esp;
+		if (esp >= USTACKTOP - PGSIZE && esp <= USTACKTOP - 1){
+			// From user stack
+			user_mem_assert(curenv, (const void*)(UXSTACKTOP - PGSIZE), PGSIZE,
+					PTE_P | PTE_U | PTE_W);
+			struct UTrapframe* utf = (struct UTrapframe*)(UXSTACKTOP - 
+					sizeof(struct UTrapframe));
+			utf->utf_fault_va = fault_va;
+			utf->utf_err = curenv->env_tf.tf_err;   
+
+			utf->utf_regs = curenv->env_tf.tf_regs;
+			utf->utf_eip = curenv->env_tf.tf_eip;
+			utf->utf_eflags = curenv->env_tf.tf_eflags;
+			utf->utf_esp = curenv->env_tf.tf_esp;
+
+			// Now branch
+			curenv->env_tf.tf_eip = (uintptr_t)(curenv->env_pgfault_upcall);
+			curenv->env_tf.tf_esp = (uintptr_t)utf;
+			env_run(curenv);
+		}
+		else if (esp >= UXSTACKTOP - PGSIZE && esp <= UXSTACKTOP - 1){
+			// From user exception stack
+			struct UTrapframe* utf = (struct UTrapframe*)((char*)esp - 
+					sizeof(struct UTrapframe) - 4);
+			utf->utf_fault_va = fault_va;
+			utf->utf_err = curenv->env_tf.tf_err;   
+
+			utf->utf_regs = curenv->env_tf.tf_regs;
+			utf->utf_eip = curenv->env_tf.tf_eip;
+			utf->utf_eflags = curenv->env_tf.tf_eflags;
+			utf->utf_esp = curenv->env_tf.tf_esp;
+
+			// Now branch
+			curenv->env_tf.tf_eip = (uintptr_t)(curenv->env_pgfault_upcall);
+			curenv->env_tf.tf_esp = (uintptr_t)utf;
+			env_run(curenv);
+		}
+	}
 
 	// Destroy the environment that caused the fault.
 	cprintf("[%08x] user fault va %08x ip %08x\n",

@@ -17,4 +17,4 @@ SMP: CPU 3 starting
 [00000000] new env 00001000
 [00001000] user panic in <unknown> at lib/fork.c:81: fork not implemented
 Welcome to the JOS kernel monitor!
-qemu: terminating on signal 15 from pid 10097
+qemu: terminating on signal 15 from pid 17101

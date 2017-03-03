@@ -671,7 +671,14 @@ user_mem_check(struct Env *env, const void *va, size_t len, int perm)
 			return -E_FAULT;
 		}
 		pte_t* pte = pgdir_walk(env->env_pgdir, iva, 0);
+		if (!pte) {
+			// No page table allocated
+			user_mem_check_addr = (iva < va)? ((uintptr_t)va):
+				((uintptr_t)iva);
+			return -E_FAULT;
+		}
 		if ((*pte & (perm | PTE_P)) != (perm | PTE_P)){
+			// Page table allocated, but no page allocated or no perm
 			user_mem_check_addr = (iva < va)? ((uintptr_t)va):
 				((uintptr_t)iva);
 			return -E_FAULT;
