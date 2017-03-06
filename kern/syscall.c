@@ -254,7 +254,9 @@ sys_page_map(envid_t srcenvid, void *srcva,
 	if (!pp) return -E_INVAL;
 	if (!(*pte & PTE_W) && perm & PTE_W) return -E_INVAL;
 
-	return page_insert(dstenv->env_pgdir, pp, dstva, perm);
+	ret = page_insert(dstenv->env_pgdir, pp, dstva, perm);
+
+	return ret;
 
 	// LAB 4: Your code here.
 	panic("sys_page_map not implemented");
