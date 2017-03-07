@@ -383,7 +383,8 @@ page_fault_handler(struct Trapframe *tf)
 		uintptr_t esp = curenv->env_tf.tf_esp;
 		if (esp >= USTACKTOP - PGSIZE && esp <= USTACKTOP - 1){
 			// From user stack
-			user_mem_assert(curenv, (const void*)(UXSTACKTOP - PGSIZE), PGSIZE,
+			user_mem_assert(curenv, (const void*)(UXSTACKTOP - sizeof(struct 
+							UTrapframe)), sizeof(struct UTrapframe), 
 					PTE_P | PTE_U | PTE_W);
 			struct UTrapframe* utf = (struct UTrapframe*)(UXSTACKTOP - 
 					sizeof(struct UTrapframe));
