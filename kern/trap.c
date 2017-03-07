@@ -378,8 +378,11 @@ page_fault_handler(struct Trapframe *tf)
 	//   (the 'tf' variable points at 'curenv->env_tf').
 
 	// LAB 4: Your code here.
+	// print_trapframe(tf);
 	if (curenv->env_pgfault_upcall){
 		// cprintf("Have pgfault upcall\n");
+		// Check the page fault upcall
+		user_mem_assert(curenv, curenv->env_pgfault_upcall, 1, PTE_P | PTE_U);
 		uintptr_t esp = curenv->env_tf.tf_esp;
 		if (esp >= USTACKTOP - PGSIZE && esp <= USTACKTOP - 1){
 			// From user stack
