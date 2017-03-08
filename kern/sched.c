@@ -31,7 +31,10 @@ sched_yield(void)
 	// LAB 4: Your code here.
 	idle = NULL;
 	uint32_t cur;
-	if (curenv) cur = ENVX(curenv->env_id);
+	if (curenv) {
+		cur = ENVX(curenv->env_id);
+		// cprintf("sched: current envid = %08x\n", curenv->env_id);
+	}
 	else cur = 0;
 	uint32_t i = cur;
 	do {
@@ -41,6 +44,8 @@ sched_yield(void)
 		}
 		i = (i + 1) % NENV;
 	} while (i != cur);
+	// if (idle)
+	// 	cprintf("sched: chosen envid = %08x\n", idle->env_id);
 
 	if (idle) env_run(idle);
 	else if (curenv && curenv->env_status == ENV_RUNNING) env_run(curenv);
