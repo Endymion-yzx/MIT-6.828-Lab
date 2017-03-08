@@ -77,6 +77,7 @@ duppage(envid_t envid, unsigned pn)
 	if (!(pde & PTE_P)) return 0;
 	pte_t pte = uvpt[pn];
 	if (!(pte & PTE_P)) return 0;
+	// cprintf("virtual page %08x\n", pn * PGSIZE);
 
 	if ((pte & PTE_W) || (pte & PTE_COW)) perm |= PTE_COW;
 
@@ -127,12 +128,13 @@ fork(void)
 	else {
 		uint32_t pn;
 		for (pn = 0; pn * PGSIZE < UTOP; pn++){
+			// cprintf("virtual page %08x\n", pn * PGSIZE);
 			if (pn * PGSIZE == UXSTACKTOP - PGSIZE) 
 				continue;
 			if ((ret = duppage(envid, pn)) < 0)
 				return ret;
 		}
-		cprintf("Fork: duppage finished\n");
+		// cprintf("Fork: duppage finished\n");
 
 		// Should be done by parent
 		if ((ret = sys_page_alloc(envid, (void*)(UXSTACKTOP - PGSIZE), PTE_P |
