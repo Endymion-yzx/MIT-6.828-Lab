@@ -1,0 +1,5 @@
+1. How does cpunum() work?
+2. Why should we map page from parent to child first and then map page back?
+A process writes to the stack each time it calls a function with parameters. If the stack page of parent is mapped as PTE_COW first, the page will be copied and mapped as PTE_W right before mapping the child's stack page.
+3. Why mark COW again if already COW?
+The page may be written and become writable before mapping it in the child's space.
