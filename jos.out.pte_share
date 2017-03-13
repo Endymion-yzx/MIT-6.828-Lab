@@ -35,4 +35,4 @@ TRAP frame at 0xf0295000 from CPU 0
   flag 0x00003286
   esp  0xeebfff3c
   ss   0x----0023
-qemu: terminating on signal 15 from pid 13819
+qemu: terminating on signal 15 from pid 13386
