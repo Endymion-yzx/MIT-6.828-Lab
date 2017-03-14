@@ -24,17 +24,16 @@ file_flush is good
 file_truncate is good
 file rewrite is good
 running sh -x < testshell.sh | cat
-elf magic 00000000 want 464c457f
-[00001002] user panic in <unknown> at user/testshell.c:33: spawn: file is not a valid executable
+[00001002] user panic in <unknown> at lib/spawn.c:134: sys_env_set_trapframe: invalid parameter
 Welcome to the JOS kernel monitor!
 Type 'help' for a list of commands.
 TRAP frame at 0xf02960f8 from CPU 0
-  edi  0xfffffff2
+  edi  0x00000058
   esi  0x00802b42
-  ebp  0xeebfdf80
+  ebp  0xeebfdc90
   oesp 0xf0213fdc
-  ebx  0xeebfdf94
-  edx  0xeebfde38
+  ebx  0xeebfdca4
+  edx  0xeebfdb48
   ecx  0x00000001
   eax  0x00000001
   es   0x----0023
@@ -44,6 +43,6 @@ TRAP frame at 0xf02960f8 from CPU 0
   eip  0x00800528
   cs   0x----001b
   flag 0x00000286
-  esp  0xeebfdf78
+  esp  0xeebfdc88
   ss   0x----0023
-qemu: terminating on signal 15 from pid 5338
+qemu: terminating on signal 15 from pid 22755
