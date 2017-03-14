@@ -18,25 +18,32 @@ block cache is good
 superblock is good
 bitmap is good
 alloc_block is good
-[00001000] user panic in fs at fs/fs.c:160: file_get_block not implemented
+file_open is good
+file_get_block is good
+file_flush is good
+file_truncate is good
+file rewrite is good
+running sh -x < testshell.sh | cat
+elf magic 00000000 want 464c457f
+[00001002] user panic in <unknown> at user/testshell.c:33: spawn: file is not a valid executable
 Welcome to the JOS kernel monitor!
 Type 'help' for a list of commands.
-TRAP frame at 0xf0295000 from CPU 0
-  edi  0x10001000
-  esi  0x008036fa
-  ebp  0xeebfdea0
-  oesp 0xf0212fdc
-  ebx  0xeebfdeb4
-  edx  0xeebfdd58
+TRAP frame at 0xf02960f8 from CPU 0
+  edi  0xfffffff2
+  esi  0x00802b42
+  ebp  0xeebfdf80
+  oesp 0xf0213fdc
+  ebx  0xeebfdf94
+  edx  0xeebfde38
   ecx  0x00000001
   eax  0x00000001
   es   0x----0023
   ds   0x----0023
   trap 0x00000003 Breakpoint
   err  0x00000000
-  eip  0x008015e5
+  eip  0x00800528
   cs   0x----001b
-  flag 0x00003282
-  esp  0xeebfde98
+  flag 0x00000286
+  esp  0xeebfdf78
   ss   0x----0023
-qemu: terminating on signal 15 from pid 17419
+qemu: terminating on signal 15 from pid 5338
