@@ -187,6 +187,7 @@ file_get_block(struct File *f, uint32_t filebno, char **blk)
 		return ret;
 	if (*pdiskbno == 0){
 		uint32_t bno = alloc_block();
+		// cprintf("file_get_block: bno = %u\n", bno);
 		if (bno < 0)
 			return bno;
 		*pdiskbno = bno;
