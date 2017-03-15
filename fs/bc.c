@@ -88,8 +88,8 @@ flush_block(void *addr)
 	void* pg_addr = ROUNDDOWN(addr, PGSIZE);
 	if ((ret = ide_write(blockno * BLKSECTS, pg_addr, BLKSECTS)) < 0)
 		panic("In flush_block, ide_write: %e", ret);
-	if ((ret = sys_page_map(0, addr, 0, addr, uvpt[PGNUM(addr)] & PTE_SYSCALL))
-			< 0)
+	if ((ret = sys_page_map(0, pg_addr, 0, pg_addr, uvpt[PGNUM(addr)] & 
+					PTE_SYSCALL)) < 0)
 		panic("In flush_block, sys_page_map: %e", ret);
 	// panic("flush_block not implemented");
 }

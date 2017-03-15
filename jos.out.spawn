@@ -29,7 +29,7 @@ Welcome to the JOS kernel monitor!
 Type 'help' for a list of commands.
 TRAP frame at 0xf029607c from CPU 0
   edi  0x00000058
-  esi  0x008023ee
+  esi  0x0080244e
   ebp  0xeebfdcd0
   oesp 0xf0213fdc
   ebx  0xeebfdce4
@@ -45,4 +45,4 @@ TRAP frame at 0xf029607c from CPU 0
   flag 0x00000282
   esp  0xeebfdcc8
   ss   0x----0023
-qemu: terminating on signal 15 from pid 22213
+qemu: terminating on signal 15 from pid 15265
