@@ -4,3 +4,4 @@ A process writes to the stack each time it calls a function with parameters. If 
 3. Why mark COW again if already COW?
 The page may be written and become writable before mapping it in the child's space.
 4. How is the disk image made?
+5. Why can (fd != fd2) happen?
