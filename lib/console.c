@@ -22,8 +22,10 @@ getchar(void)
 	// allowing the user to redirect script files to the shell and such.
 	// getchar() reads a character from file descriptor 0.
 	r = read(0, &c, 1);
-	if (r < 0)
+	if (r < 0){
+		cprintf("getchar: %e\n", r);
 		return r;
+	}
 	if (r < 1)
 		return -E_EOF;
 	return c;
