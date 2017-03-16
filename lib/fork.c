@@ -79,6 +79,11 @@ duppage(envid_t envid, unsigned pn)
 	if (!(pte & PTE_P)) return 0;
 	// cprintf("virtual page %08x\n", pn * PGSIZE);
 
+	// LAB 5
+	if (pte & PTE_SHARE)
+		return sys_page_map(thisenv->env_id, (void*)(pn * PGSIZE), envid,
+				(void*)(pn * PGSIZE), pte & PTE_SYSCALL);
+
 	if ((pte & PTE_W) || (pte & PTE_COW)) perm |= PTE_COW;
 
 	if ((r = sys_page_map(thisenv->env_id, (void*)(pn * PGSIZE), envid, 

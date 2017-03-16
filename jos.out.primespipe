@@ -17,7 +17,6 @@ Device 1 presence: 1
 block cache is good
 superblock is good
 bitmap is good
-alloc_block is good
 [00001002] user panic in primespipe at user/primespipe.c:21: primeproc could not read initial prime: 0, error 0
 Welcome to the JOS kernel monitor!
 Type 'help' for a list of commands.
@@ -39,4 +38,4 @@ TRAP frame at 0xf02960f8 from CPU 0
   flag 0x00000286
   esp  0xeebfdf48
   ss   0x----0023
-qemu: terminating on signal 15 from pid 15154
+qemu: terminating on signal 15 from pid 21244
