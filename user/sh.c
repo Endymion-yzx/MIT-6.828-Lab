@@ -55,7 +55,15 @@ again:
 			// then close the original 'fd'.
 
 			// LAB 5: Your code here.
-			panic("< redirection not implemented");
+			if ((fd = open(t, O_RDWR)) < 0){
+				cprintf("open %s for read: %e", t, fd);
+				exit();
+			}
+			if (fd != 0){
+				dup(fd, 0);
+				close(fd);
+			}
+			// panic("< redirection not implemented");
 			break;
 
 		case '>':	// Output redirection
@@ -101,7 +109,7 @@ again:
 				close(p[0]);
 				goto runit;
 			}
-			panic("| not implemented");
+			// panic("| not implemented");
 			break;
 
 		case 0:		// String is complete

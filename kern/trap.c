@@ -259,8 +259,13 @@ trap_dispatch(struct Trapframe *tf)
 
 	// Handle keyboard and serial interrupts.
 	// LAB 5: Your code here.
-
-	if (tf->tf_trapno == T_PGFLT){
+	if (tf->tf_trapno == IRQ_OFFSET + IRQ_KBD){
+		kbd_intr();
+	}
+	else if (tf->tf_trapno == IRQ_OFFSET + IRQ_SERIAL){
+		serial_intr();
+	}
+	else if (tf->tf_trapno == T_PGFLT){
 		page_fault_handler(tf);
 	}
 	else if (tf->tf_trapno == T_BRKPT){
